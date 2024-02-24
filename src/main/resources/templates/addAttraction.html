@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/3942/3942076.png">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<body style="background-image: url('https://www.danmarksoplevelser.dk/wp-content/uploads/2021/04/Ophold-i-Danmark.jpg'); background-size: cover; background-position: center;">
+
+
+<section>
+    <div>
+        <form th:action="@{/attractions/save}" method="post" th:object="${addAttraction}">
+
+            <table>
+                <tr>
+                    <th colspan="2"><h1>Add Attraction</h1></th>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="name">Attraktionsnavn:</label><br>
+                        <input type="text" id="name" th:field="*{name}" name="user_name"/><br></br>
+                        <label for="description">Description:</label><br>
+                        <input type="text" id="description" th:field="*{description}" name="user_mail"/><br></br>
+                        <label for="city">City</label><br>
+                        <select id="city" th:field="*{city}" >
+                            <option value="">København</option>
+                            <option value="">Aarhus</option>
+                            <option value="">Odense</option>
+                            <option value="">Aalborg</option>
+                            <option value="">Esbjerg</option>
+                        </select><br><br>
+                        <input type="radio" name="size" id="size_1" value="small">
+                        <label for="size_1">Børnevenlig</label><br></br>
+                        <input type="radio" name="size" id="size_2" value="medium">
+                        <label for="size_2">Gratis</label><br></br>
+                        <input type="radio" name="size" id="size_3" value="large">
+                        <label for="size_3">Kunst</label><br></br>
+                        <input type="radio" name="size" id="size_4" value="museum">
+                        <label for="size_4">Museum</label><br></br>
+                        <input type="radio" name="size" id="size_5" value="natural">
+                        <label for="size_5">Natur</label><br></br>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Add Attraction">
+                        <a href="http://localhost:8080/attractions" class="tilbage">Tilbage</a>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</section>
+
+
+</body>
+</html>

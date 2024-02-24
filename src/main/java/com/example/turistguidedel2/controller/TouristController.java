@@ -1,7 +1,6 @@
 package com.example.turistguidedel2.controller;
 
 import com.example.turistguidedel2.model.TouristAttraction;
-import com.example.turistguidedel2.repository.TourisRepository;
 import com.example.turistguidedel2.service.TouristService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,15 +39,15 @@ public class TouristController {
     }
 
     @GetMapping("/add")
-    public String addAttraction(TouristAttraction touristAttraction, Model model) {
-        model.addAttribute("addAttractions", touristService.addAttraction(touristAttraction));
-        return "opretAttraction";
+    public String add(Model model) {
+        model.addAttribute("addAttraction", new TouristAttraction("", "", "", new ArrayList<>()));
+        return "addAttraction";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute TouristAttraction touristAttraction) {
+    public String save(@ModelAttribute("attraction") TouristAttraction touristAttraction) {
         touristService.save(touristAttraction);
-        return "opretAttraction";
+        return "attractionList";
     }
 
 
