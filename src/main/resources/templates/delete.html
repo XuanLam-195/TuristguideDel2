@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/3942/3942076.png">
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+
+<body>
+
+<h1 th:text="${attraction.name}"></h1>
+
+<section>
+    <div>
+        <form>
+        <a th:href="@{/delete/{name}(name=${attractionTag.name})}" class="delete-link">Delete</a>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>city</th>
+                    <th>category</th>
+
+                </tr>
+
+                <tr th:each="attractionTag : ${attraction}">
+                    <td th:text="${attractionTag.name}" ></td>
+                    <td th:text="${attractionTag.description}"></td>
+                    <td th:text="${attractionTag.city}"></td>
+                    <td th:text="${attraction.category}"></td>
+
+                </tr>
+
+            </table>
+        </form>
+    </div>
+</section>
+
+
+<button>
+    <a href="http://localhost:8080/attractions" class="tilbage"  type="submit">Back</a>
+</button>
+</body>
+
+</html>

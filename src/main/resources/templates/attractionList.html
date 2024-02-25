@@ -5,6 +5,16 @@
     <title>TouristAttraction</title>
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/3942/3942076.png">
     <link rel="stylesheet" type="text/css" href="/main.css">
+    <title>Two Buttons with Space</title>
+    <style>
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-container button {
+            margin: 0 10px;
+        }
+    </style>
 </head>
 
 
@@ -18,28 +28,32 @@
             <tr>
                 <th>Name</th>
                 <th>Description</th>
-                <th>tags</th>
-                <th>Slet</th>
-                <th>Opdater</th>
+                <th>City</th>
+                <th>Tags</th>
+                <th>Delete</th>
+                <th>Update</th>
             </tr>
 
 
             <tr th:each="attraction : ${attractions}">
                 <td th:text="${attraction.name}"></td>
                 <td th:text="${attraction.description}"></td>
+                <td th:text="${attraction.city}"></td>
                 <td><a class="tagKnap" th:href="@{'/attractions/' + ${attraction.getName()} + '/tags'}">Tags</a></td>
-                <td><a class="tagKnap" th:href="@{'/attractions/' + ${attraction.getName()} + '/'}">Slet</a></td>
-                <td><a class="tagKnap" th:href="@{'/attractions/' + ${attraction.getName()} + '/'}">Opdater</a></td>
+                <td><a class="tagKnap" th:href="@{'/attractions/' + ${attraction.getName()} + '/'}">Delete</a></td>
+                <td><a class="tagKnap" th:href="@{'/attractions/' + ${attraction.getName()} + '/'}">Update</a></td>
             </tr>
         </table>
 
     </div>
 
-    <div class="knap">
-
+    <div class="button-container">
         <a th:href="@{'/attractions/add'}" class="KnapAttraktion">Add Attraction</a>
-
+        <a th:href="@{'/attractions/edit'}" class="KnapAttraktion">Edit Attraction</a>
     </div>
+
+
+
 </section>
 
 

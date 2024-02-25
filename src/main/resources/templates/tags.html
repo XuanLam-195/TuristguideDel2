@@ -9,10 +9,11 @@
 
 <body>
 
-<h1 th:text="${name}"></h1>
+<h1 th:text="${attraction.name}"></h1>
 
 <section>
     <div>
+        <form th:action="@{/tags}" method="post" th:object="${tags}">
         <table>
             <tr>
                 <th>Name</th>
@@ -26,18 +27,19 @@
                 <td th:text="${attractionTag.name}" ></td>
             <td th:text="${attractionTag.description}"></td>
             <td th:text="${attractionTag.city}"></td>
-                <td th:text="${attarction.category}"></td>
+                <td th:text="${attraction.category}"></td>
 
             </tr>
 
         </table>
+        </form>
     </div>
 </section>
 
 
 
 <button>
-    <a href="http://localhost:8080/attractions" class="tilbage"  type="submit">Tilbage</a>
+    <a href="http://localhost:8080/attractions" class="tilbage"  type="submit">Back</a>
 </button>
 </body>
 

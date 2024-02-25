@@ -32,6 +32,7 @@ public class TouristController {
         for(TouristAttraction touristAttraction : touristAttractions){
             if(touristAttraction.getName().equals(name)){
                 attraction = touristAttraction;
+                break;
             }
         }
         model.addAttribute("attraction", attraction);
@@ -45,13 +46,28 @@ public class TouristController {
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("attraction") TouristAttraction touristAttraction) {
+    public String save(@ModelAttribute("addAttraction") TouristAttraction touristAttraction) {
         touristService.save(touristAttraction);
-        return "attractionList";
+        return "redirect:/attractions";
+    }
+
+    @GetMapping("/edit")
+    public String showEditForm(Model model) {
+        model.addAttribute("editAttraction", new TouristAttraction("", "", "", new ArrayList<>()));
+        return "editAttraction";
     }
 
 
-
+    @PostMapping("/update")
+    public String update(@ModelAttribute("editAttraction") TouristAttraction touristAttraction){
+        touristService.update(touristAttraction);
+        return "redirect:/attractions";
+    }
+    @GetMapping("/delete/{name}")
+    public String delete(@PathVariable("name") TouristAttraction name){
+        touristService.delete(name);
+        return "attractionList";
+    }
 
 
 

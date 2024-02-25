@@ -47,6 +47,7 @@ public class TouristAttraction {
         return name;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -63,4 +64,7 @@ public class TouristAttraction {
     public String getDescription() {
         return description;
     }
+
+
+
 }
