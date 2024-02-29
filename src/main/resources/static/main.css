@@ -41,11 +41,8 @@ button{
 
 
 .knap{
-    display: grid;
-    grid-template-columns: 4fr 1fr;
-    gap: 1em;
-    grid-column: 1;
-    grid-row: 2;
+    text-align: center;
+    margin-top: 20px;
 }
 
 .KnapAttraktion:active{

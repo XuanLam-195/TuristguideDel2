@@ -7,16 +7,16 @@ public class TouristAttraction {
     private String name;
     private String description;
     private String city;
-    private List<String> category;
+    private List<String> tagList;
 
 
 
 
-    public TouristAttraction(String name, String description, String city, List<String> category){
+    public TouristAttraction(String name, String description, String city, List<String> tagList){
         this.name = name;
         this.description = description;
         this.city = city;
-        this.category = category;
+        this.tagList = tagList;
     }
 
     public void setCity(String city) {
@@ -25,15 +25,15 @@ public class TouristAttraction {
 
 
 
-    public void setCategory(List<String> category) {
-        this.category = category;
+    public void setTagList(List<String> tagList) {
+        this.tagList = tagList;
     }
     public String getCity() {
         return city;
     }
 
-    public List<String> getCategory() {
-        return category;
+    public List<String> getTagList() {
+        return tagList;
     }
     public void setName(String name) {
         this.name = name;

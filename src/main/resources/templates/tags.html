@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -9,38 +9,46 @@
 
 <body>
 
-<h1 th:text="${attraction.name}"></h1>
+
 
 <section>
     <div>
-        <form th:action="@{/tags}" method="post" th:object="${tags}">
+        <h2 th:text="${attraction.name}"></h2>
         <table>
             <tr>
                 <th>Name</th>
                 <th>Description</th>
                 <th>city</th>
-                <th>category</th>
-
              </tr>
 
-            <tr th:each="attractionTag : ${attraction}">
-                <td th:text="${attractionTag.name}" ></td>
-            <td th:text="${attractionTag.description}"></td>
-            <td th:text="${attractionTag.city}"></td>
-                <td th:text="${attraction.category}"></td>
-
+            <tr >
+                <td th:text="${attraction.name}" >Name</td>
+            <td th:text="${attraction.description}">Description</td>
+            <td th:text="${attraction.city}">City</td>
             </tr>
 
         </table>
-        </form>
     </div>
 </section>
 
+<section>
+    <div>
+        <h2>Tags</h2>
+        <table>
+            <tr>
+                <th>Tags</th>
+            </tr>
+            <tr th:each="tag : ${tags}">
+                <td th:text="${tag}">Tag</td>
+            </tr>
+        </table>
+    </div>
+</section>
 
+<div>
+    <a href="/attractions" class="KnapAttraktion">Back</a>
+</div>
 
-<button>
-    <a href="http://localhost:8080/attractions" class="tilbage"  type="submit">Back</a>
-</button>
 </body>
 
 </html>

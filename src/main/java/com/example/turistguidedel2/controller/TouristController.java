@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -26,28 +27,30 @@ public class TouristController {
     }
 
     @GetMapping("/{name}/tags")
-    public String getAttractionTags(Model model, @PathVariable String name ){
-        List<TouristAttraction> touristAttractions = touristService.getAllAttractions();
-        TouristAttraction attraction = null;
-        for(TouristAttraction touristAttraction : touristAttractions){
-            if(touristAttraction.getName().equals(name)){
-                attraction = touristAttraction;
-                break;
-            }
+    public String getAttractionTags(Model model, @PathVariable String name) {
+        TouristAttraction attraction = touristService.findByName(name);
+        if (attraction != null) {
+            model.addAttribute("attraction", attraction);
+            model.addAttribute("tags", attraction.getTagList());
         }
-        model.addAttribute("attraction", attraction);
         return "tags";
     }
 
+
     @GetMapping("/add")
     public String add(Model model) {
+        List<String> cityList = Arrays.asList("København", "Aarhus", "Aalborg", "Odense", "Esbjerg");
+        List<String> tagsList = Arrays.asList("Børnevenlig", "Gratis", "Kunst", "Museum", "Natur");
         model.addAttribute("addAttraction", new TouristAttraction("", "", "", new ArrayList<>()));
+        model.addAttribute("city", cityList);
+        model.addAttribute("tags", tagsList);
         return "addAttraction";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute("addAttraction") TouristAttraction touristAttraction) {
-        touristService.save(touristAttraction);
+    public String save(@ModelAttribute TouristAttraction touristAttraction, Model model) {
+        model.addAttribute("add", touristService.addAttraction(touristAttraction));
+        //touristService.save(touristAttraction);
         return "redirect:/attractions";
     }
 
@@ -64,9 +67,9 @@ public class TouristController {
         return "redirect:/attractions";
     }
     @GetMapping("/delete/{name}")
-    public String delete(@PathVariable("name") TouristAttraction name){
+    public String delete(@PathVariable String name){
         touristService.delete(name);
-        return "attractionList";
+        return "redirect:/attractions";
     }
 
 

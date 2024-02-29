@@ -59,12 +59,29 @@ public class TouristService {
         return tourisRepository.readfil();
     }
 
-    public void delete(TouristAttraction touristAttraction){
-        tourisRepository.deleteAttraction(touristAttraction);
+    public void delete(String name) {
+        TouristAttraction touristAttraction = tourisRepository.findByName(name);
+        if (touristAttraction != null) {
+            tourisRepository.delete(touristAttraction);
+        }
     }
+
 
 
     public TouristAttraction getAttractionByName(TouristAttraction name) {
         return tourisRepository.save(name);
+    }
+
+    public List<String> getNameByTags(){
+        return tourisRepository.getNameByTags();
+    }
+
+    public List<String> getCity(){
+        return tourisRepository.getCity();
+
+    }
+
+    public TouristAttraction findByName(String name) {
+        return tourisRepository.findByName(name);
     }
 }

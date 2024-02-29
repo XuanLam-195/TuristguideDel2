@@ -63,24 +63,39 @@ public class TourisRepository {
         return null;
     }
 
-    public TouristAttraction deleteAttraction(TouristAttraction touristAttraction) {
-        touristAttractionList.remove(touristAttraction);
+    public TouristAttraction delete(TouristAttraction touristAttraction) {
+        touristAttractionList.removeIf(attraction -> attraction.getName().equals(touristAttraction.getName()));
         return touristAttraction;
     }
 
-    public List<String> getNameByTags() {
-        for (TouristAttraction touristAttraction : touristAttractionList) {
-            return touristAttraction.getCategory();
+
+    public TouristAttraction findByName(String name) {
+        for (TouristAttraction attraction : touristAttractionList) {
+            if (attraction.getName().equals(name)) {
+                return attraction;
+            }
+        }
+        return null;
+    }
+
+    public List<String> getNameByTags(){
+        for (TouristAttraction touristAttraction : touristAttractionList){
+            return touristAttraction.getTagList();
         }
         return Collections.emptyList();
     }
 
-    public List<String> getCity() {
+    public List<String> getCity(){
         List<String> cityList = new ArrayList<>();
-        for (TouristAttraction touristAttraction : touristAttractionList) {
+        for (TouristAttraction touristAttraction : touristAttractionList){
             cityList.add(touristAttraction.getCity());
         }
         return cityList;
+    }
+
+
+    public List<TouristAttraction> findAllAttractions(){
+        return touristAttractionList;
     }
 
     public void saveAll(List<TouristAttraction> attractions) {
