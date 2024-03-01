@@ -12,34 +12,8 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
 class TuristguideDel2ApplicationTests {
-
-    @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-    static
-    class RandomPortTest {
-
-    }
-    @LocalServerPort
-    private int port;
-
-
-
-    @Autowired
-    private TouristController controller;
-
-    @Autowired
-    private TouristService touristService;
-
-
-    @Autowired
-
-    private TourisRepository tourisRepository;
-
     @Test
-    void contextLoads() {
-    }
-
-
-
-
+    void contextLoads(){
+        }
 
 }
