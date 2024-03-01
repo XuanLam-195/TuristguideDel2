@@ -56,14 +56,18 @@ public class TouristController {
 
     @GetMapping("/edit")
     public String showEditForm(Model model) {
+        List<String> cityList = Arrays.asList("København", "Aarhus", "Aalborg", "Odense", "Esbjerg");
+        List<String> tagsList = Arrays.asList("Børnevenlig", "Gratis", "Kunst", "Museum", "Natur");
         model.addAttribute("editAttraction", new TouristAttraction("", "", "", new ArrayList<>()));
+        model.addAttribute("city", cityList);
+        model.addAttribute("tags", tagsList);
         return "editAttraction";
     }
 
 
     @PostMapping("/update")
-    public String update(@ModelAttribute("editAttraction") TouristAttraction touristAttraction){
-        touristService.update(touristAttraction);
+    public String update(@ModelAttribute("editAttraction") TouristAttraction touristAttraction, Model model){
+        model.addAttribute("edit", touristService.addAttraction(touristAttraction));
         return "redirect:/attractions";
     }
     @GetMapping("/delete/{name}")

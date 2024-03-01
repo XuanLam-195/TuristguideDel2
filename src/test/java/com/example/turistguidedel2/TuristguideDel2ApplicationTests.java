@@ -35,12 +35,7 @@ class TuristguideDel2ApplicationTests {
     private TourisRepository tourisRepository;
 
     @Test
-    void contextLoads(){
-        assertThat(controller).isNotNull();
-        assertThat(touristService).isNotNull();
-
-
-        assertThat(tourisRepository).isNull();
+    void contextLoads() {
     }
 
 

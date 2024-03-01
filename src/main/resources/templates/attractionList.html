@@ -31,6 +31,7 @@
                 <th>City</th>
                 <th>Tags</th>
                 <th>Delete</th>
+                <th>Edit</th>
                 <th>Update</th>
             </tr>
 
@@ -40,7 +41,8 @@
                 <td th:text="${attraction.description}"></td>
                 <td th:text="${attraction.city}"></td>
                 <td><a class="tagKnap" th:href="@{'/attractions/' + ${attraction.getName()} + '/tags'}">Tags</a></td>
-                <td><a class="tagKnap" th:href="'/attractions/delete/'+ ${attraction.name}">Slet</a></td>
+                <td><a class="tagKnap" th:href="'/attractions/delete/'+ ${attraction.name}">Delete</a></td>
+                <td><a class="tagKnap" th:href="'/attractions/edit/'+ ${attraction.name}">Edit</a></td>
                 <td><a class="tagKnap" th:href="@{'/attractions/' + ${attraction.getName()} + '/'}">Update</a></td>
             </tr>
         </table>
