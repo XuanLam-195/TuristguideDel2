@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class TouristAttraction {
-    private String name;
+    private final String name;
     private String description;
     private String city;
     private List<String> tagList;
@@ -23,8 +23,6 @@ public class TouristAttraction {
         this.city = city;
     }
 
-
-
     public void setTagList(List<String> tagList) {
         this.tagList = tagList;
     }
@@ -34,9 +32,6 @@ public class TouristAttraction {
 
     public List<String> getTagList() {
         return tagList;
-    }
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setDescription(String description) {

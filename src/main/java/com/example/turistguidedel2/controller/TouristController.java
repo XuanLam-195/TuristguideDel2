@@ -40,8 +40,8 @@ public class TouristController {
     @GetMapping("/add")
     public String add(Model model) {
         List<String> cityList = Arrays.asList("København", "Aarhus", "Aalborg", "Odense", "Esbjerg");
-        List<String> tagsList = Arrays.asList("Børnevenlig", "Gratis", "Kunst", "Museum", "Natur");
-        model.addAttribute("addAttraction", new TouristAttraction("", "", "", new ArrayList<>()));
+        List<String> tagsList = touristService.getAllTags();
+        model.addAttribute("addForm", new TouristAttraction("", "", "", new ArrayList<>()));
         model.addAttribute("city", cityList);
         model.addAttribute("tags", tagsList);
         return "addAttraction";
@@ -54,7 +54,7 @@ public class TouristController {
         return "redirect:/attractions";
     }
 
-    @GetMapping("/edit")
+   /* @GetMapping("/update/{name}")
     public String showEditForm(Model model) {
         List<String> cityList = Arrays.asList("København", "Aarhus", "Aalborg", "Odense", "Esbjerg");
         List<String> tagsList = Arrays.asList("Børnevenlig", "Gratis", "Kunst", "Museum", "Natur");
@@ -62,14 +62,25 @@ public class TouristController {
         model.addAttribute("city", cityList);
         model.addAttribute("tags", tagsList);
         return "editAttraction";
-    }
+    }*/
 
 
     @PostMapping("/update")
-    public String update(@ModelAttribute("editAttraction") TouristAttraction touristAttraction, Model model){
-        model.addAttribute("edit", touristService.addAttraction(touristAttraction));
+    public String updateAttraction(@ModelAttribute TouristAttraction touristAttraction){
+        touristService.editAttraction(touristAttraction);
         return "redirect:/attractions";
     }
+
+    @GetMapping("/edit/{name}")
+    public String editByName(@PathVariable String name, Model model){
+        TouristAttraction attraction = touristService.findByName(name);
+        model.addAttribute("attraction", attraction);
+        model.addAttribute("cities", touristService.getCity());
+        return "updateAttraction";
+    }
+
+
+
     @GetMapping("/delete/{name}")
     public String delete(@PathVariable String name){
         touristService.delete(name);

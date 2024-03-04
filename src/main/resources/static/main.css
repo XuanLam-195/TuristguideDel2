@@ -26,6 +26,7 @@ button{
     border-radius: 5px;
     transition: 0.9s;
     margin: 10px auto;
+
 }
 
 .tilbage{
@@ -47,12 +48,14 @@ button{
 
 .KnapAttraktion:active{
     opacity: 0.6;
+
 }
 
 .KnapAttraktion:hover{
     background-color: #0056b3;
     color: white;
     cursor: pointer;
+
 }
 
 .tilbage:hover{

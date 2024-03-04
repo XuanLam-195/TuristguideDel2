@@ -3,12 +3,11 @@ package com.example.turistguidedel2.repository;
 import com.example.turistguidedel2.model.TouristAttraction;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+
 @Repository
 public class TourisRepository {
+    private List<String> tagList = Arrays.asList("Børnevenlig", "Gratis", "Kunst", "Museum", "Natur");
     private final List<TouristAttraction> touristAttractionList = new ArrayList<>(List.of(
             new TouristAttraction("Tivoli", "Forlystelsespark", "København", List.of("Bornevenlig")),
             new TouristAttraction("Zoologiske have", " Har beliggenhed i København.", "København", List.of("Naturlig", "Bornevenlig")),
@@ -17,51 +16,24 @@ public class TourisRepository {
     ));
 
 
-    public List<TouristAttraction> readfil() {
-        return touristAttractionList;
-    }
-
-    public TouristAttraction createAttraction(TouristAttraction touristAttraction) {
-        touristAttractionList.add(touristAttraction);
-        return touristAttraction;
-    }
 
     public TouristAttraction addAttraction(TouristAttraction touristAttraction) {
         touristAttractionList.add(touristAttraction);
         return touristAttraction;
     }
-    public TouristAttraction editAttraction(TouristAttraction updateAttraction){
-        for (int i = 0; i < touristAttractionList.size(); i++){
-            TouristAttraction attraction = touristAttractionList.get(i);
-            if (attraction.getName().equals(updateAttraction.getName())){
-                touristAttractionList.set(i, updateAttraction);
-                return updateAttraction;
-            }
-        }
-        return  null;
-    }
 
-    public TouristAttraction save(TouristAttraction touristAttraction) {
-        if (touristAttraction != null) {
-            boolean exists = touristAttractionList.contains(touristAttraction);
-            if (!exists) {
-                touristAttractionList.add(touristAttraction);
+    public TouristAttraction editAttraction(TouristAttraction touristAttraction) {
+        for (TouristAttraction findTouristattraction : touristAttractionList) {
+            if (findTouristattraction.getName().equals(touristAttraction.getName())) {
+                findTouristattraction.setDescription(touristAttraction.getDescription());
+                findTouristattraction.setCity(touristAttraction.getCity());
+                findTouristattraction.setTagList(touristAttraction.getTagList());
             }
         }
         return touristAttraction;
     }
 
 
-    public TouristAttraction updateAttraction(TouristAttraction touristAttraction) {
-        for (TouristAttraction attraction : touristAttractionList) {
-            if (attraction.getName().equals(touristAttraction.getName())) {
-                attraction.setName(touristAttraction.getName());
-                attraction.setDescription(attraction.getDescription());
-                return touristAttraction;
-            }
-        }
-        return null;
-    }
 
     public TouristAttraction delete(TouristAttraction touristAttraction) {
         touristAttractionList.removeIf(attraction -> attraction.getName().equals(touristAttraction.getName()));
@@ -78,9 +50,11 @@ public class TourisRepository {
         return null;
     }
 
-    public List<String> getNameByTags(){
+    public List<String> getTagsByName(String name){
         for (TouristAttraction touristAttraction : touristAttractionList){
-            return touristAttraction.getTagList();
+            if (name.equals(touristAttraction.getName())) {
+                return touristAttraction.getTagList();
+            }
         }
         return Collections.emptyList();
     }
@@ -98,9 +72,9 @@ public class TourisRepository {
         return touristAttractionList;
     }
 
-    public void saveAll(List<TouristAttraction> attractions) {
 
+    public List<String> getAllTags(){
+        return this.tagList;
     }
-
 
 }

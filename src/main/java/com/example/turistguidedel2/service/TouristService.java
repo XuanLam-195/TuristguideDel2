@@ -10,12 +10,9 @@ import java.util.List;
 public class TouristService {
     TourisRepository tourisRepository = new TourisRepository();
 
-    public TouristService(TourisRepository tourisRepository){
-        this.tourisRepository = tourisRepository;
-    }
 
     public List<TouristAttraction> getAllAttractions(){
-        return tourisRepository.readfil();
+        return tourisRepository.findAllAttractions();
     }
 
     public TouristAttraction addAttraction(TouristAttraction touristAttraction) {
@@ -23,40 +20,9 @@ public class TouristService {
         return touristAttraction;
     }
 
-    public TouristAttraction save(TouristAttraction touristAttraction) {
-        return tourisRepository.save(touristAttraction);
 
-    }
-
-    public TouristAttraction editAttraction(TouristAttraction updatedAttraction) {
-        List<TouristAttraction> attractions = tourisRepository.readfil();
-        for (int i = 0; i < attractions.size(); i++) {
-            TouristAttraction attraction = attractions.get(i);
-            if (attraction.getName().equals(updatedAttraction.getName())) {
-                // Cập nhật các thuộc tính của đối tượng attraction từ updatedAttraction
-                attraction.setName(updatedAttraction.getName());
-                attraction.setDescription(updatedAttraction.getDescription());
-                // Cập nhật các thuộc tính khác tùy thuộc vào cách bạn lưu trữ dữ liệu
-
-                tourisRepository.saveAll(attractions); // Lưu lại danh sách các địa điểm du lịch sau khi cập nhật
-                return updatedAttraction;
-            }
-        }
-        return null;
-    }
-
-
-    public TouristAttraction update(TouristAttraction touristAttraction){
-        tourisRepository.updateAttraction(touristAttraction);
-        return touristAttraction;
-    }
-
-    public void create(TouristAttraction touristAttraction){
-        tourisRepository.createAttraction(touristAttraction);
-    }
-
-    public List<TouristAttraction> readAtrraktioner(){
-        return tourisRepository.readfil();
+    public TouristAttraction editAttraction(TouristAttraction touristAttraction){
+        return tourisRepository.editAttraction(touristAttraction);
     }
 
     public void delete(String name) {
@@ -64,16 +30,6 @@ public class TouristService {
         if (touristAttraction != null) {
             tourisRepository.delete(touristAttraction);
         }
-    }
-
-
-
-    public TouristAttraction getAttractionByName(TouristAttraction name) {
-        return tourisRepository.save(name);
-    }
-
-    public List<String> getNameByTags(){
-        return tourisRepository.getNameByTags();
     }
 
     public List<String> getCity(){
@@ -84,4 +40,12 @@ public class TouristService {
     public TouristAttraction findByName(String name) {
         return tourisRepository.findByName(name);
     }
+    public List<String> getTagsByName(String name){
+        return tourisRepository.getTagsByName(name);
+    }
+
+    public List<String> getAllTags(){
+        return tourisRepository.getAllTags();
+    }
+
 }

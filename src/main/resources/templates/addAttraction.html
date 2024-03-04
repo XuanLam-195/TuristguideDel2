@@ -9,41 +9,42 @@
 <body style="background-image: url('https://uhdwallpapers.org/uploads/converted/18/07/02/landscape-photography-from-denmark-750x1334_69444-mm-90.jpg'); background-size: cover; background-position: center;">
 
 
-<section>
+
     <h1>Add Attraction</h1>
-    <form action="/attractions/save" method="post" th:object="${addAttraction}">
+    <form action="/attractions/save" method="post" th:object="${addForm}">
 
         <div class="form-group">
-            <label for="name"><b>Name of Attraction:</b></label>
-            <input id="name" name="name" th:value="${addAttraction.name}" type="text" required>
+            <label for="name">Name of Attraction:</label>
+            <input id="name" name="name" th:value="${addForm.name}" type="text" required>
         </div>
 
         <div class="form-group">
-            <label for="description"><b>Description of Attraction:</b></label>
-            <input id="description" name="description" th:value="${addAttraction.description}" type="text" required>
+            <label for="description">Description of Attraction:</label>
+            <input id="description" name="description" th:value="${addForm.description}" type="text" required>
         </div>
 
         <div class="form-group">
-            <label for="city"><b>City:</b></label>
+            <label for="city">City:</label>
             <select id="city" name="city" th:field="*{city}">
                 <option th:each="c : ${city}" th:value="${c}" th:text="${c}"></option>
             </select>
         </div>
 
+        <label>Tags:</label>
         <div class="form-group">
-            <label><b>Tags:</b></label>
             <div th:each="tag : ${tags}">
-                <input type="checkbox" th:field="*{tagList}" th:value="${tag}">
+                <label>
+                    <input type="checkbox" th:field="*{tagList}" th:value="${tag}">
+                </label>
                 <label th:text="${tag}"></label>
             </div>
         </div>
 
         <div class="form-actions">
             <button type="submit">Add Attraction</button>
-            <a href="http://localhost:8080/attractions"><b>Back</b></a>
+            <a href="http://localhost:8080/attractions">Back</a>
         </div>
     </form>
-</section>
 
 
 
