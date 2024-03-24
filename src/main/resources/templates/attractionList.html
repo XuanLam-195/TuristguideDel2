@@ -16,22 +16,36 @@
     <div>
         <table>
             <tr>
+                <th>ID</th>
                 <th>Name</th>
+                <th>Location</th>
                 <th>Description</th>
+                <th>Opening Hours</th>
+                <th>Adult Ticket Price</th>
+                <th>Child Ticket Price</th>
+                <th>Rating</th>
                 <th>City</th>
                 <th>Tags</th>
                 <th>Delete</th>
                 <th>Update</th>
+
             </tr>
 
 
             <tr th:each="attraction : ${attractions}">
+                <td th:text="${attraction.attraction_id}"></td>
                 <td th:text="${attraction.name}"></td>
+                <td th:text="${attraction.location}"></td>
                 <td th:text="${attraction.description}"></td>
+                <td th:text="${attraction.opening_hours.toString()}"></td>
+                <td th:text="${attraction.adult_ticket_price}"></td>
+                <td th:text="${attraction.child_ticket_price}"></td>
+                <td th:text="${attraction.rating}"></td>
                 <td th:text="${attraction.city}"></td>
-                <td><a class="tagKnap" th:href="@{'/attractions/' + ${attraction.getName()} + '/tags'}">Tags</a></td>
-                <td><a class="tagKnap" th:href="'/attractions/delete/'+ ${attraction.name}">Delete</a></td>
-                <td><a class="tagKnap" th:href="@{'/attractions/edit/' + ${attraction.name}}">Update</a></td>
+
+                <td><a class="tagKnap" th:href="@{'/attractions/' + ${attraction.getAttraction_id()} + '/tags'}">Tags</a></td>
+                <td><a class="tagKnap" th:href="'/attractions/delete/'+ ${attraction.getAttraction_id()}">Delete</a></td>
+                <td><a class="tagKnap" th:href="@{'/attractions/update/' + ${attraction.getAttraction_id()}}">Update</a></td>
             </tr>
         </table>
 
@@ -46,7 +60,7 @@
 
 <footer>
     <p>
-        Contact us on  <a href="mailto:tourist-attraktion2024@hotmail.com">tourist-attraktion2024@hotmail.com</a>
+     <!--  Contact us on  <a href="mailto:tourist-attraktion2024@hotmail.com">tourist-attraktion2024@hotmail.com</a> -->
     </p>
 </footer>
 

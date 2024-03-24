@@ -1,11 +1,13 @@
 package com.example.turistguidedel2.controller;
 
+import com.example.turistguidedel2.model.City;
 import com.example.turistguidedel2.model.TouristAttraction;
 import com.example.turistguidedel2.service.TouristService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,9 +28,9 @@ public class TouristController {
         return "attractionList";
     }
 
-    @GetMapping("/{name}/tags")
-    public String getAttractionTags(Model model, @PathVariable String name) {
-        TouristAttraction attraction = touristService.findByName(name);
+    @GetMapping("/{id}/tags")
+    public String getAttractionTags(Model model, @PathVariable int id) {
+        TouristAttraction attraction = touristService.getAttractionById(id);
         if (attraction != null) {
             model.addAttribute("attraction", attraction);
             model.addAttribute("tags", attraction.getTagList());
@@ -39,9 +41,9 @@ public class TouristController {
 
     @GetMapping("/add")
     public String add(Model model) {
-        List<String> cityList = Arrays.asList("København", "Aarhus", "Aalborg", "Odense", "Esbjerg");
-        List<String> tagsList = touristService.getAllTags();
-        model.addAttribute("addForm", new TouristAttraction("", "", "", new ArrayList<>()));
+        List<City> cityList = touristService.getCities();
+        List<String> tagsList = new ArrayList<String>();
+        model.addAttribute("addForm", new TouristAttraction("", "", 0, new ArrayList<>(), "", LocalDateTime.now(), 10.0, 5.0, 4.0));
         model.addAttribute("city", cityList);
         model.addAttribute("tags", tagsList);
         return "addAttraction";
@@ -54,39 +56,27 @@ public class TouristController {
         return "redirect:/attractions";
     }
 
-   /* @GetMapping("/update/{name}")
-    public String showEditForm(Model model) {
-        List<String> cityList = Arrays.asList("København", "Aarhus", "Aalborg", "Odense", "Esbjerg");
-        List<String> tagsList = Arrays.asList("Børnevenlig", "Gratis", "Kunst", "Museum", "Natur");
-        model.addAttribute("editAttraction", new TouristAttraction("", "", "", new ArrayList<>()));
-        model.addAttribute("city", cityList);
-        model.addAttribute("tags", tagsList);
-        return "editAttraction";
-    }*/
 
 
-    @PostMapping("/update")
-    public String updateAttraction(@ModelAttribute TouristAttraction touristAttraction){
-        touristService.editAttraction(touristAttraction);
-        return "redirect:/attractions";
-    }
-
-    @GetMapping("/edit/{name}")
-    public String editByName(@PathVariable String name, Model model){
-        TouristAttraction attraction = touristService.findByName(name);
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable int id, Model model){
+        TouristAttraction attraction = touristService.getAttractionById(id);
+        List<City> cityList = touristService.getCities();
         model.addAttribute("attraction", attraction);
-        model.addAttribute("cities", touristService.getCity());
+        model.addAttribute("cities", cityList);
         return "updateAttraction";
     }
 
-
-
-    @GetMapping("/delete/{name}")
-    public String delete(@PathVariable String name){
-        touristService.delete(name);
+    @PostMapping("/update")
+    public String updateAttraction(@ModelAttribute TouristAttraction touristAttraction){
+        touristService.editAttraction(touristAttraction.getAttraction_id(), touristAttraction);
         return "redirect:/attractions";
     }
 
-
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable int id){
+        touristService.delete(id);
+        return "redirect:/attractions";
+    }
 
 }

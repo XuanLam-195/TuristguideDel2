@@ -12,6 +12,7 @@
 
     <h1>Edit Attraction</h1>
     <form action="/attractions/update" method="post" th:object="${attraction}">
+        <input id="attraction_id" name="attraction_id"  type="hidden" th:value="${attraction.getAttraction_id()}" readonly>
 
         <div class="form-group">
             <label for="name">Name of Attraction:</label>
@@ -24,24 +25,46 @@
         </div>
 
         <div class="form-group">
+            <label for="location">Location:</label>
+            <input id="location" name="location" type="text" th:value="${attraction.location}">
+        </div>
+
+        <div class="form-group">
+            <label for="opening_hours">Opening_hours:</label>
+            <input id="opening_hours" name="opening_hours" type="datetime-local" th:value="${attraction.opening_hours}">
+        </div>
+
+        <div class="form-group">
+            <label for="adult_ticket_price">Adult_ticket_price:</label>
+            <input id="adult_ticket_price" name="adult_ticket_price" type="number" th:value="${attraction.adult_ticket_price}">
+        </div>
+
+        <div class="form-group">
+            <label for="child_ticket_price">Child_ticket_price:</label>
+            <input id="child_ticket_price" name="child_ticket_price" type="number" th:value="${attraction.child_ticket_price}">
+        </div>
+
+        <div class="form-group">
+            <label for="rating">Adult_ticket_price:</label>
+            <input id="rating" name="rating" type="number" th:value="${attraction.rating}">
+        </div>
+
+        <div class="form-group">
             <label for="city">City:</label>
-            <select id="city"  th:value="${cities}" name="city">
-                <option value="København">København</option>
-                <option value="Aarhus">Aarhus</option>
-                <option value="Aalborg">Aalborg</option>
-                <option value="Odense">Odense</option>
-                <option value="Esbjerg">Esbjerg</option>
+            <select id="city" name="city" th:field="*{city}">
+                <option th:each="c : ${cities}" th:value="${c.getCity_id()}" th:text="${c.getCity_name()}"></option>
             </select>
         </div>
 
-        <div>
+
+       <!-- <div>
             <div><strong>Tags:</strong></div>
             <div><label><input type="checkbox" th:field="*{tagList}" value="Børnevenlig" /> Børnevenlig</label></div>
             <div><label><input type="checkbox" th:field="*{tagList}" value="Gratis" /> Gratis</label></div>
             <div><label><input type="checkbox" th:field="*{tagList}" value="Kunst" /> Kunst</label></div>
             <div><label><input type="checkbox" th:field="*{tagList}" value="Museum" /> Museum</label></div>
             <div><label><input type="checkbox" th:field="*{tagList}" value="Natur" /> Natur</label></div>
-            </div>
+        </div> -->
 
 
         <div class="form-actions">

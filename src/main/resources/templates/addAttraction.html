@@ -14,19 +14,44 @@
     <form action="/attractions/save" method="post" th:object="${addForm}">
 
         <div class="form-group">
-            <label for="name">Name of Attraction:</label>
+            <label for="name">Name:</label>
             <input id="name" name="name" th:value="${addForm.name}" type="text" required>
         </div>
 
         <div class="form-group">
-            <label for="description">Description of Attraction:</label>
+            <label for="description">Description:</label>
             <input id="description" name="description" th:value="${addForm.description}" type="text" required>
         </div>
 
         <div class="form-group">
-            <label for="city">City:</label>
-            <select id="city" name="city" th:field="*{city}">
-                <option th:each="c : ${city}" th:value="${c}" th:text="${c}"></option>
+            <label for="location">Location:</label>
+            <input id="location" name="location" th:value="${addForm.location}" type="text" required>
+        </div>
+
+        <div class="form-group">
+            <label for="opening_hours">Opening_hours:</label>
+            <input id="opening_hours" name="opening_hours" th:value="${addForm.opening_hours}" type="datetime-local" required>
+        </div>
+
+        <div class="form-group">
+            <label for="adult_ticket_price">Adult_ticket_price:</label>
+            <input id="adult_ticket_price" name="adult_ticket_price" th:value="${addForm.adult_ticket_price}" type="number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="child_ticket_price">Child_ticket_price:</label>
+            <input id="child_ticket_price" name="child_ticket_price" th:value="${addForm.child_ticket_price}" type="number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <input id="rating" name="rating" th:value="${addForm.rating}" type="number" required>
+        </div>
+
+        <div class="form-group">
+            <label for="city_id">City:</label>
+            <select id="city_id" name="city_name" th:field="*{city}">
+                <option th:each="c : ${city}" th:value="${c.city_id}" th:text="${c.city_name}"></option>
             </select>
         </div>
 

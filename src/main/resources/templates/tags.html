@@ -9,8 +9,6 @@
 
 <body>
 
-
-
 <section>
     <div>
         <h2 th:text="${attraction.name}"></h2>
@@ -36,10 +34,12 @@
         <h2>Tags</h2>
         <table>
             <tr>
-                <th>Tags</th>
+                <th>TagID</th>
+                <th>TagName</th>
             </tr>
             <tr th:each="tag : ${tags}">
-                <td th:text="${tag}">Tag</td>
+                <td th:text="${tag.getTag_id()}"></td>
+                <td th:text="${tag.getTag_name()}"></td>
             </tr>
         </table>
     </div>

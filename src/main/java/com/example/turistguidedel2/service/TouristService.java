@@ -1,5 +1,7 @@
 package com.example.turistguidedel2.service;
 
+import com.example.turistguidedel2.model.City;
+import com.example.turistguidedel2.model.Tag;
 import com.example.turistguidedel2.model.TouristAttraction;
 import com.example.turistguidedel2.repository.TourisRepository;
 import org.springframework.stereotype.Service;
@@ -20,32 +22,27 @@ public class TouristService {
         return touristAttraction;
     }
 
-
-    public TouristAttraction editAttraction(TouristAttraction touristAttraction){
-        return tourisRepository.editAttraction(touristAttraction);
+    public List<City> getCities (){
+        return tourisRepository.getCities();
     }
 
-    public void delete(String name) {
-        TouristAttraction touristAttraction = tourisRepository.findByName(name);
-        if (touristAttraction != null) {
-            tourisRepository.delete(touristAttraction);
-        }
+    public List<Tag> getTagsById(int id){
+        return tourisRepository.getTagsById(id);
     }
 
-    public List<String> getCity(){
-        return tourisRepository.getCity();
-
+    public TouristAttraction getAttractionById(int id){
+        return tourisRepository.getAttractionById(id);
     }
 
-    public TouristAttraction findByName(String name) {
-        return tourisRepository.findByName(name);
-    }
-    public List<String> getTagsByName(String name){
-        return tourisRepository.getTagsByName(name);
+    public TouristAttraction editAttraction(int id, TouristAttraction touristAttraction){
+        return tourisRepository.editAttraction(id, touristAttraction);
     }
 
-    public List<String> getAllTags(){
+   public void delete(int attraction_id) {
+        tourisRepository.delete(attraction_id);
+    }
+
+    public List<Tag> getAllTags(){
         return tourisRepository.getAllTags();
     }
-
 }
